@@ -1,14 +1,9 @@
 ﻿using Model.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.Context
 {
-    class ChichkaContext : DbContext
+    public class ChichkaContext : DbContext
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Account_Game> Account_Games { get; set; }
@@ -18,6 +13,17 @@ namespace Model.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Account>().
+                HasKey(e => e.Id);
+            modelBuilder.Entity<Account_Game>().
+                HasKey(e => e.Id);
+            modelBuilder.Entity<Game>().
+                HasKey(e => e.Id);
+            modelBuilder.Entity<User>().
+                HasKey(e => e.Id);
+            modelBuilder.Entity<Wallet>().
+                HasKey(e => e.Id);
+
             base.OnModelCreating(modelBuilder);
         }
     }
